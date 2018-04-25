@@ -39,7 +39,7 @@ p, a, h1, span {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 75%;
+    width: 100%;
     height: calc(100vh - 50px);
     background-color: #000;
 }
@@ -55,7 +55,12 @@ p, a, h1, span {
     background-color: #006561;
     height: calc(100vh - 50px);
     width: 25%;
-    overflow-y: auto;
+    overflow: hidden;
+    transition: 0.3s;
+    z-index: 99;
+    &:hover {
+        box-shadow: 3px 0px 6px 0px rgba(0,0,0,0.52);
+    }
 }
 
 .side-bar__item {
@@ -100,6 +105,7 @@ p, a, h1, span {
 }
 
 .chat__history {
+    overflow: auto;
     height: calc(100vh - 75px);    
     background-color: #5FD3B3
 }
@@ -137,14 +143,102 @@ p, a, h1, span {
     margin: 0 auto;
     min-height: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-@media (max-width: 480px) {
+.history__item {
+    display: flex;
+    align-items: center;
+    max-width: 450px;
+    margin: 10px 5px;
+    p {
+        max-width: 420px;
+        background-color: #006561;
+        display: inline-block;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px;
+    }
+}
+
+.partner-msg {
+    align-self: flex-start;    
+    &:before {
+        content: '';
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: inline-block;
+        background-image: url(../img/avatar.jpg);
+        margin-right: 5px;
+    }
+
+
+}
+
+.my-msg {
+    align-self: flex-end;
+    &:after {
+        content: '';        
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: inline-block;
+        background-image: url(../img/avatar.jpg);
+        margin-left: 5px;
+    }
+}
+
+.side-bar__hide {
+    transition: 0.3s;
+    .item__prew {
+        display: none;
+        transition-property: opacity;
+        transition-duration: 3s;
+        opacity: 0;
+    }
+
+}
+
+.contacts__hide {
+    min-width: 50px;    
+}
+
+@media (max-width: 768px) {
+    .contacts__hide {
+        display: none;
+    }
+
+    .side-bar__hide {
+        display: none;
+    }
+
     .contacts__side-bar {
         min-width: 50px;
+        width: 20%;
     }
 
     .item__prew {
         display: none;
+    }
+
+    .history__container {
+        width: auto;
+    }
+
+    .history__item {
+        p {
+            max-width: 300px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .history__item {
+        p {
+            max-width: 165px;
+        }
     }
 }
